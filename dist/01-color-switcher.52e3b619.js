@@ -503,35 +503,30 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"cYUEh":[function(require,module,exports) {
-const startButton = document.querySelector("[data-start]");
-const stopButton = document.querySelector("[data-stop]");
-const colorChanger = {
-    interval: null,
-    currentColor: null,
-    start () {
-        this.change();
-        this.interval = setInterval(this.change, 1000);
-    },
-    stop () {
-        clearInterval(this.interval);
-    },
-    change () {
-        do document.body.style.backgroundColor = getRandomHexColor();
-        while (this.currentColor === document.body.style.backgroundColor);
-        this.currentColor = document.body.style.backgroundColor;
-        console.log(`%c ${document.body.style.backgroundColor}`, `color: ${document.body.style.backgroundColor}`);
-    }
-};
-startButton.addEventListener("click", (e)=>{
-    e.target.disabled = true;
-    colorChanger.start();
-});
-stopButton.addEventListener("click", ()=>{
-    startButton.disabled = false;
-    colorChanger.stop();
-});
+const startBtnEl = document.querySelector("button[data-start]");
+const stopBtnEl = document.querySelector("button[data-stop]");
+let intervalId = null;
+stopBtnEl.setAttribute("disabled", "true");
+startBtnEl.addEventListener("click", handleStartBtnClick);
+stopBtnEl.addEventListener("click", handleStopBtnClick);
+function handleStartBtnClick() {
+    intervalId = setInterval(()=>{
+        changeBgColor();
+    }, 1000);
+    startBtnEl.setAttribute("disabled", "true");
+    stopBtnEl.removeAttribute("disabled");
+}
+function handleStopBtnClick() {
+    clearInterval(intervalId);
+    startBtnEl.removeAttribute("disabled");
+    stopBtnEl.setAttribute("disabled", "true");
+}
+function changeBgColor() {
+    const randomColor = getRandomHexColor();
+    document.body.style.backgroundColor = randomColor;
+}
 function getRandomHexColor() {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, 0)}`;
 }
 
 },{}]},["gzrwE","cYUEh"], "cYUEh", "parcelRequired7c6")
