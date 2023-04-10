@@ -16,6 +16,31 @@ img {
   display: block;
 }
 
+.timer {
+  gap: 10px;
+  margin-top: 10px;
+  font-family: Roboto, sans-serif;
+  display: flex;
+}
+
+.field {
+  min-width: 54px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.value {
+  font-size: 45px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.label {
+  font-size: 14px;
+}
+
 .flatpickr-calendar {
   opacity: 0;
   text-align: center;
